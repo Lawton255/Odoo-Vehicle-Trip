@@ -14,7 +14,7 @@
             <field name="start_country"/>
             <field name="departure_date" />
             <field name="end_country" />
-            <field name="alive_date" />
+             <field name="arrived_date" />
             </tree>
         </field>
     </record>
@@ -33,6 +33,7 @@
                                 <field name="trip_type" />
                                 <field name="container_no" />
                                 <field name="container_type" />
+                                <field name="cargo_type" />
                                 <field name="loaded_date" />
                                 <field name="departure_date" />
                                 <field name="start_region" />
@@ -41,7 +42,7 @@
                             <group string="Trip Destination">
                                 <field name="end_region" />
                                 <field name="end_country" />
-                                <field name="alive_date" />
+                                <field name="arrived_date" />
                                 <field name="unloaded_date" />
                             </group>
                         </group>
