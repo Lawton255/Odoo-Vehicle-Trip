@@ -7,12 +7,15 @@
         <field name="model">truck.trips</field>
         <field name="arch" type="xml">
             <tree string="Trips">
+            
             <field name="trip_no" />
             <field name="customer" />
             <field name="truck" />
             <field name="trip_type" />
             <field name="start_country"/>
+            <field name="departure_date" />
             <field name="end_country" />
+            <field name="alive_date" />
             </tree>
         </field>
     </record>
