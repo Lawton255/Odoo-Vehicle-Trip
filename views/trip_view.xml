@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!--Trip Tree view-->
+      <record id="trip_tree_view" model="ir.ui.view">
+        <field name="name">Trip Tree</field>
+        <field name="model">truck.trips</field>
+        <field name="arch" type="xml">
+            <tree string="Trips">
+            <field name="trip_no" />
+            <field name="customer" />
+            <field name="truck" />
+            <field name="trip_type" />
+            <field name="start_country"/>
+            <field name="end_country" />
+            </tree>
+        </field>
+    </record>
+    <!--Trip form view-->
+        <record id="truck_trips_view_form" model="ir.ui.view">
+            <field name="name">truck.trips.view.form</field>
+            <field name="model">truck.trips</field>
+            <field name="arch" type="xml">
+                <form string="Truck Trips">
+                    <sheet>
+                        <group col="2" >
+                            <group string="Truck Trip Informations">
+                                <field name="customer" />
+                                <field name="trip_no" />
+                                <field name="truck" />
+                                <field name="trip_type" />
+                                <field name="container" />
+                                <field name="departure_date" />
+                                <field name="start_region" />
+                                <field name="start_country" />
+                            </group>
+                            <group string="Trip Destination">
+                                <field name="end_region" />
+                                <field name="end_country" />
+                                <field name="alive_date" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--Action menu-->
+        <record id="trip_menu_action" model="ir.actions.act_window">
+        <field name="name">Trips</field>
+        <field name="res_model">truck.trips</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create first trip
+            </p>
+        </field>
+        </record>
+        <menuitem
+            id="truck_trip_menu"
+            name="Truck Trips"
+            sequence="10"/>
+        <menuitem
+            id="model_name_menu"
+            name="Trips"
+            action="trip_menu_action"
+            parent="truck_trip_menu"
+            sequence="10"/>
+    </data>
+</odoo>
