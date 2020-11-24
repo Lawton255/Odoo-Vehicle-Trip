@@ -34,6 +34,7 @@
                                 <field name="container_no" />
                                 <field name="container_type" />
                                 <field name="cargo_type" />
+                                
                                 <field name="loaded_date" />
                                 <field name="departure_date" />
                                 <field name="start_region" />
@@ -44,6 +45,10 @@
                                 <field name="end_country" />
                                 <field name="arrived_date" />
                                 <field name="unloaded_date" />
+                            </group>
+                            <group string="Cargo prices">
+                                <field name="go_price"/>
+                                <field name="return_price"/>
                             </group>
                         </group>
                     </sheet>
@@ -65,12 +70,12 @@
         <menuitem
             id="truck_trip_menu"
             name="Truck Trip"
-            sequence="10"/>
+            sequence="2"/>
         <menuitem
             id="model_name_menu"
             name="Trips"
             action="trip_menu_action"
             parent="truck_trip_menu"
-            sequence="10"/>
+            sequence="1"/>
     </data>
 </odoo>
