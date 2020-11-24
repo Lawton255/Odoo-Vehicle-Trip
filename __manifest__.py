@@ -26,6 +26,7 @@
         #'views/views.xml',
        # 'views/templates.xml',
        'views/trip_view.xml',
+       
     ],
     # only loaded in demonstration mode
     'demo': [
