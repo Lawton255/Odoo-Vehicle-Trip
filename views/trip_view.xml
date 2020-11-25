@@ -15,7 +15,7 @@
             <field name="departure_date" />
             <field name="end_country" />
              <field name="arrived_date" />
-             <field name="amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+             <field name="total_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
             </tree>
         </field>
     </record>
@@ -37,8 +37,6 @@
                                 <field name="trip_type" />
                                 <field name="container_no" />
                                 <field name="container_type" />
-                                <field name="cargo_type" />
-                                
                                 <field name="loaded_date" />
                                 <field name="departure_date" />
                                 <field name="start_region" />
@@ -50,8 +48,11 @@
                                 <field name="arrived_date" />
                                 <field name="unloaded_date" />
                             </group>
-                            <group string="Cargo prices">
-                                <field name="amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <group string="Cargo Details">
+                                <field name="cargo_type" />
+                                <field name="cargo_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="cargo_unit" />
+                                <field name="total_amount" />
                             </group>
                         </group>
                     </sheet>
