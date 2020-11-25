@@ -15,21 +15,25 @@
             <field name="departure_date" />
             <field name="end_country" />
              <field name="arrived_date" />
+             <field name="amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
             </tree>
         </field>
     </record>
     <!--Trip form view-->
         <record id="truck_trips_view_form" model="ir.ui.view">
-            <field name="name">truck.trips.view.form</field>
+            <field name="name">truck</field>
             <field name="model">truck.trip</field>
             <field name="arch" type="xml">
                 <form string="Truck Trips">
                     <sheet>
+
+                        <group>
+                            <field name="truck" string="Truck"/>
+                        </group>
                         <group col="2" >
                             <group string="Truck Trip Informations">
                                 <field name="customer" />
                                 <field name="trip_no" />
-                                <field name="truck" />
                                 <field name="trip_type" />
                                 <field name="container_no" />
                                 <field name="container_type" />
@@ -47,8 +51,7 @@
                                 <field name="unloaded_date" />
                             </group>
                             <group string="Cargo prices">
-                                <field name="go_price"/>
-                                <field name="return_price"/>
+                                <field name="amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             </group>
                         </group>
                     </sheet>
