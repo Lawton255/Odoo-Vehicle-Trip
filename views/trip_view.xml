@@ -2,25 +2,28 @@
 <odoo>
     <data>
     <!--Trip Tree view-->
-      <record id="trip_tree_view" model="ir.ui.view">
+      <record id="view_tree_truck_trip_inherited" model="ir.ui.view">
         <field name="name">Trip Tree</field>
         <field name="model">truck.trip</field>
         <field name="arch" type="xml">
             <tree string="Trips">
             <field name="trip_no" />
-            <field name="customer" />
             <field name="truck" />
+            <field name="customer" />
             <field name="trip_type" />
             <field name="start_country"/>
+            <field name="loaded_date" />
             <field name="departure_date" />
             <field name="end_country" />
              <field name="arrived_date" />
-             <field name="total_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+             <field name="unloaded_date" />
+             <field name="total_amount" sum="Price" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
             </tree>
+            
         </field>
     </record>
     <!--Trip form view-->
-        <record id="truck_trips_view_form" model="ir.ui.view">
+        <record id="view_form_truck_trip_inherited" model="ir.ui.view">
             <field name="name">truck</field>
             <field name="model">truck.trip</field>
             <field name="arch" type="xml">
@@ -51,8 +54,8 @@
                             <group string="Cargo Details">
                                 <field name="cargo_type" />
                                 <field name="cargo_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                                <field name="cargo_unit" />
-                                <field name="total_amount" />
+                                <field name="cargo_quantity" />
+                                <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}" />
                             </group>
                         </group>
                     </sheet>
