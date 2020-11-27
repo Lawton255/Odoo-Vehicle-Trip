@@ -69,7 +69,7 @@
                                 <field name="cargo_quantity" />
                                 <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}" />
                             </group>
-                            <group string="Commission">
+                            <group string="Commission(Posho)">
                                 <field name="cargo_commission" />
                                 <field name="unit_qty" />
                                 <field name="bond_price"/>
