@@ -12,12 +12,12 @@
             <field name="customer" />
             <field name="trip_type" />
             <field name="start_country"/>
-            <field name="loaded_date" />
             <field name="departure_date" />
             <field name="end_country" />
              <field name="arrived_date" />
-             <field name="unloaded_date" />
-             <field name="total_amount" sum="Price" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+             <field name="total_amount" sum="Total Cargo Return" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+             <field name="total_commission" sum="Total Commission"/>
+             <field name="total_return" sum="Total Return" />
             </tree>
             
         </field>
@@ -51,11 +51,32 @@
                                 <field name="arrived_date" />
                                 <field name="unloaded_date" />
                             </group>
+                            <!--notebook>
+                                <page string="Cargo details">
+                                    <field name="line_ids" readonly="1">
+                                        <tree>
+                                            <field name="cargo_type"/>
+                                            <field name="cargo_amount"/>
+                                            <field name="cargo_quantity"/>
+                                            <field name="total_amount" />
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook-->
                             <group string="Cargo Details">
                                 <field name="cargo_type" />
                                 <field name="cargo_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                 <field name="cargo_quantity" />
                                 <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}" />
+                            </group>
+                            <group string="Commission">
+                                <field name="cargo_commission" />
+                                <field name="unit_qty" />
+                                <field name="bond_price"/>
+                                <field name="total_commission"/>
+                            </group>
+                            <group string="Total Cargo Return without Expenses">
+                                <field name="total_return" />
                             </group>
                         </group>
                     </sheet>
