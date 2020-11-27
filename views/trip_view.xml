@@ -15,7 +15,7 @@
             <field name="departure_date" />
             <field name="end_country" />
              <field name="arrived_date" />
-             <field name="total_amount" sum="Total Cargo Return" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+             <field name="total_amount" sum="Total Trip Return" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
              <field name="total_commission" sum="Total Commission"/>
              <field name="total_return" sum="Total Return" />
             </tree>

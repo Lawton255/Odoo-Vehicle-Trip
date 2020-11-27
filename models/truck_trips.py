@@ -44,7 +44,7 @@ class TruckTrips(models.Model):
 
     cargo_commission = fields.Float(string='Commission Price in USD')
     unit_qty         = fields.Float(string='Quantity in Tonnes', default='1.0')
-    bond_price       = fields.Float(string='Bond Price in USD', default='100.0')
+    bond_price       = fields.Float(string='Bond Price in USD')
     total_commission = fields.Float(string='Total Commission' , compute="_compute_total_commission")
 
     total_return = fields.Float(string='Total Return without expenses $', compute='_compute_total_return')
