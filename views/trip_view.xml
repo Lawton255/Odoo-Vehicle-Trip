@@ -14,10 +14,12 @@
             <field name="start_country"/>
             <field name="departure_date" />
             <field name="end_country" />
-             <field name="arrived_date" />
-             <field name="total_amount" sum="Total Trip Return" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-             <field name="total_commission" sum="Total Commission"/>
-             <field name="total_return" sum="Total Return" />
+            <field name="arrived_date" />
+            <field name="total_amount" sum="Total Trip Return" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            <field name="total_commission" sum="Total Commission"/>
+            <field name="total_return" sum="Total Return" />
+            <field name="rate" />
+            <field name="total_return_rate" sum="Total return in Tsh"/>
             </tree>
             
         </field>
@@ -75,8 +77,12 @@
                                 <field name="bond_price"/>
                                 <field name="total_commission"/>
                             </group>
-                            <group string="Total Cargo Return without Expenses">
+                            <group string="Total Cargo Return without Expenses in USD">
                                 <field name="total_return" />
+                            </group>
+                            <group string="Total Cargo Return without Expenses in Tsh">
+                                <field name="rate" />
+                                <field name="total_return_rate" />
                             </group>
                         </group>
                     </sheet>

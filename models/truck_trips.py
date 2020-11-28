@@ -20,6 +20,11 @@ class TruckTrips(models.Model):
     def _compute_total_return(self):
         for rec in self:
             rec['total_return'] = rec.total_amount - rec.total_commission
+
+    @api.depends('total_return', 'rate')
+    def _compute_rate(self):
+        for myrate in self:
+            myrate['total_return_rate'] = myrate.total_return * myrate.rate
             
 
     customer    = fields.Many2one('res.partner' , string='Customer name', required=True)
@@ -40,13 +45,16 @@ class TruckTrips(models.Model):
     cargo_type  =    fields.Selection([('lose cargo', 'Lose Cargo'),('steel cargo', 'Steel Cargo') ], string="Cargo type", required=True)
     cargo_amount = fields.Float(string="Price in USD", required=True)
     cargo_quantity   = fields.Float(string="Quantity in Tonnes", default='1.00')
-    total_amount = fields.Float(string="Cargo Return in USD", compute="_compute_total_amount")
+    total_amount = fields.Float(string="Cargo Return (USD)", compute="_compute_total_amount")
 
-    cargo_commission = fields.Float(string='Commission Price in USD')
+    cargo_commission = fields.Float(string='Commission Price (USD)')
     unit_qty         = fields.Float(string='Quantity in Tonnes', default='1.0')
-    bond_price       = fields.Float(string='Bond Price in USD')
-    total_commission = fields.Float(string='Total Commission' , compute="_compute_total_commission")
+    bond_price       = fields.Float(string='Bond Price (USD)')
+    total_commission = fields.Float(string='Total Commission (USD)' , compute="_compute_total_commission")
 
-    total_return = fields.Float(string='Total Return without expenses $', compute='_compute_total_return')
+    total_return = fields.Float(string='Total Return without expenses (USD)', compute='_compute_total_return')
+
+    rate = fields.Float(string="Rate (Tsh)", required=True)
+    total_return_rate = fields.Float(string="Total Return without expenses (Tsh)", compute="_compute_rate")
 
     
