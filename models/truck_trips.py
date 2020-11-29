@@ -2,7 +2,7 @@ from odoo import models, fields, api
 
 class TruckTrips(models.Model):
     _name = 'truck.trip'
-    _iniherit = 'fleet.vehicle'
+    _iniherit = 'fleet.vehicle' , 'region.region'
 
     @api.depends('cargo_quantity', 'cargo_amount')
     def _compute_total_amount(self):
@@ -37,9 +37,9 @@ class TruckTrips(models.Model):
     arrived_date  = fields.Date(string='Arrived date')
     loaded_date  = fields.Date(string='Loaded date')
     unloaded_date  = fields.Date(string='Unloaded date')
-    start_region    = fields.Char(string='Departure Region', default="Dar Es Salaam")
+    start_region    = fields.Many2one('region.region', 'Departure Region', required=True)
     start_country   = fields.Many2one('res.country', string='Departure Country', required=True)
-    end_region      = fields.Char(string='Destination Region')
+    end_region      = fields.Many2one('region.region', 'Destination Region', required=True)
     end_country     = fields.Many2one('res.country', string='Destination Country', required=True)
 
     cargo_type  =    fields.Selection([('lose cargo', 'Lose Cargo'),('steel cargo', 'Steel Cargo') ], string="Cargo type", required=True)
