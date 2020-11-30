@@ -2,7 +2,9 @@ from odoo import models, fields, api
 
 class TruckTrips(models.Model):
     _name = 'truck.trip'
-    _iniherit = 'fleet.vehicle' , 'region.region'
+    _iniherit = [{'fleet.vehicle': 'licence_plate'} ,
+                 'region.region',
+                 'trip.cargo']
 
     @api.depends('cargo_quantity', 'cargo_amount')
     def _compute_total_amount(self):
@@ -42,7 +44,7 @@ class TruckTrips(models.Model):
     end_region      = fields.Many2one('region.region', 'Destination Region', required=True)
     end_country     = fields.Many2one('res.country', string='Destination Country', required=True)
 
-    cargo_type  =    fields.Selection([('lose cargo', 'Lose Cargo'),('steel cargo', 'Steel Cargo') ], string="Cargo type", required=True)
+    cargo_type  =    fields.Many2one('trip.cargo', required=True)
     cargo_amount = fields.Float(string="Price in USD", required=True)
     cargo_quantity   = fields.Float(string="Quantity in Tonnes", default='1.00')
     total_amount = fields.Float(string="Cargo Return (USD)", compute="_compute_total_amount")
@@ -56,5 +58,3 @@ class TruckTrips(models.Model):
 
     rate = fields.Float(string="Rate (Tsh)", required=True)
     total_return_rate = fields.Float(string="Total Return without expenses (Tsh)", compute="_compute_rate")
-
-    
