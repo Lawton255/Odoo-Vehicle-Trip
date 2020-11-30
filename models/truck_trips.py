@@ -5,6 +5,7 @@ class TruckTrips(models.Model):
     _iniherit = [{'fleet.vehicle': 'licence_plate'} ,
                  'region.region',
                  'trip.cargo']
+    _order    = 'trip_no desc'
 
     @api.depends('cargo_quantity', 'cargo_amount')
     def _compute_total_amount(self):
