@@ -2,6 +2,7 @@ from odoo import models, fields, api
 
 class TruckTrips(models.Model):
     _name = 'truck.trip'
+    _rec_name = 'trip_no'
     _iniherit = [{'fleet.vehicle': 'licence_plate'} ,
                  'region.region',
                  'trip.cargo']
