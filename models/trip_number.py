@@ -4,4 +4,8 @@ class TripNumber(models.Model):
     _name = 'trip.number'
     _rec_name = 'trip_no'
 
-    trip_no = fields.Char(string="Trip number", unique=True)
+    #_sql_constraints = [
+    #('trip_no', 'unique (trip_no)', _('Trip number must be unique !')),
+    #]
+
+    trip_no = fields.Char(string="Trip number")
