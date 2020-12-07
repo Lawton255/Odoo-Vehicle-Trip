@@ -32,7 +32,7 @@ class TruckTrips(models.Model):
             myrate['total_return_rate'] = myrate.total_return * myrate.rate
             
 
-    
+    #Truck trips
     trip_no     = fields.Many2one('trip.number', required=True, unique=True, auto_join=True, index=True, ondelete='cascade')
     customer    = fields.Many2one('res.partner' , string='Customer name', required=True, auto_join=True, index=True, ondelete='cascade')
     truck       =  fields.Many2one('fleet.vehicle', string='Truck', required=True, auto_join=True, index=True, ondelete='cascade')
@@ -48,11 +48,13 @@ class TruckTrips(models.Model):
     end_region      = fields.Many2one('region.region', 'Destination Region', required=True, auto_join=True, index=True, ondelete='cascade')
     end_country     = fields.Many2one('res.country', string='Destination Country', required=True, auto_join=True, index=True, ondelete='cascade')
 
+    #Cargo details
     cargo_type  =    fields.Many2one('trip.cargo', required=True, auto_join=True, index=True, ondelete='cascade')
     cargo_amount = fields.Float(string="Price in USD", required=True)
     cargo_quantity   = fields.Float(string="Quantity in Tonnes", default='1.00')
     total_amount = fields.Float(string="Cargo Return (USD)", compute="_compute_total_amount")
 
+    #Commission
     cargo_commission = fields.Float(string='Commission Price (USD)')
     unit_qty         = fields.Float(string='Quantity in Tonnes', default='1.0')
     bond_price       = fields.Float(string='Bond Price (USD)')
@@ -60,6 +62,6 @@ class TruckTrips(models.Model):
 
     total_return = fields.Float(string='Total Return without expenses (USD)', compute='_compute_total_return')
 
-    rate = fields.Float(string="Rate (Tsh)", required=True)
+    rate = fields.Float(string="Rate(Tsh)", required=True)
     total_return_rate = fields.Float(string="Total Return without expenses (Tsh)", compute="_compute_rate")
 
