@@ -70,7 +70,7 @@ class TruckTrips(models.Model):
 class TruckExpenses(models.Model):
     _name = 'expense.truck'
     #_rec_name = 'trip_no'
-    _order  =   'date asc'
+    _order  =   'date desc'
 
 
     @api.depends('expense_amount', 'expense_qty')
