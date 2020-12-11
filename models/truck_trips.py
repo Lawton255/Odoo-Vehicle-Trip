@@ -104,7 +104,7 @@ class TruckExpenses(models.Model):
     payment_method = fields.Selection([('cash', 'Cash'), ('cheque', 'Cheque'), ('mobile_money', 'Mobile Money'),], required=True)
     #payment_reference = fields.Char(string='Payment reference', required=True)
     supplier = fields.Many2one('expense.supplier', required=True, auto_join=True, index=True, ondelete='cascade')
-    parent_id = fields.Many2one(comodel_name="truck.trip", string="Parent ID", required=False, auto_join=True, index=True, ondelete='cascade')
+    parent_id = fields.Many2one(comodel_name="truck.trip", string="Trip no", required=False, auto_join=True, index=True, ondelete='cascade')
 
 class ProductExpenses(models.Model):
     _name = 'expenses.product'
