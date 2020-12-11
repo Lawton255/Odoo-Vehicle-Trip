@@ -84,6 +84,29 @@
                                 <field name="rate" />
                                 <field name="total_return_rate" />
                             </group>
+                            <notebook>
+                            <page name="Expenses" string="Truck Expense">
+                                <group>
+                                    <field name="child_id" widget="one2many_list">
+                                        <tree string="General Expense" editable="bottom">
+                                            <field name="date"/>
+                                            <!--field name="trip_no" /-->
+                                            <field name="responsible" />
+                                            <field name="expense_type" />
+                                            <field name="expense_product" />
+                                            <field name="expense_amount" />
+                                            <field name="expense_qty" />
+                                            <field name="paid_by" />
+                                            <field name="payment_method" />
+                                            <field name="supplier" />
+                                            <field name="paid" />
+                                            <field name="expense_total" sum="Total"/>
+                                        
+                                        </tree>
+                                    </field>
+                            </group>
+                            </page>
+                        </notebook>
                         </group>
                     </sheet>
                 </form>

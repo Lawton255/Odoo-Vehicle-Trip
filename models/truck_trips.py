@@ -64,4 +64,60 @@ class TruckTrips(models.Model):
 
     rate = fields.Float(string="Rate(Tsh)", required=True)
     total_return_rate = fields.Float(string="Total Return without expenses (Tsh)", compute="_compute_rate")
+    child_id = fields.One2many(comodel_name="expense.truck", inverse_name="parent_id", string="General Expense",required=False, auto_join=True, index=True, ondelete='cascade')
 
+    #Truck Expenses
+class TruckExpenses(models.Model):
+    _name = 'expense.truck'
+    #_rec_name = 'trip_no'
+    _order  =   'date asc'
+
+
+    @api.depends('expense_amount', 'expense_qty')
+    def _compute_total_expense(self):
+        for record in self:
+                record['expense_total'] = record.expense_amount * record.expense_qty
+
+    @api.model
+    def default_get(self, default_fields):
+        res = super(TruckExpenses, self).default_get(default_fields)
+        res.update({
+            'date': fields.Date.context_today(self)})
+        return res
+
+    
+    #trip_no = fields.Many2one('truck.trip', 'Trip no', required=True , auto_join=True, index=True, ondelete='cascade')
+    responsible = fields.Many2one('res.partner', 'Responsible', required=True , auto_join=True, index=True, ondelete='cascade')
+    date                = fields.Date(string="Date")
+    #expense_id  = fields.One2many('expense.truck', 'id', string='Expense Line')
+    expense_type = fields.Many2one('expense.type',required=True, auto_join=True, index=True, ondelete='cascade')
+    expense_product = fields.Many2one('expenses.product', 'Expense name', required=True , auto_join=True, index=True, ondelete='cascade')
+    expense_amount  = fields.Float(string="Price", required=True)
+    expense_qty        = fields.Float(string="Quantity" , default='1.0')
+    expense_total   = fields.Float(string="Total(Tsh)", compute="_compute_total_expense", required=True)
+    #expense_responsible = fields.Many2one('res.partner', 'Responsible Person', auto_join=True, index=True, ondelete='cascade')
+    
+
+    #Payments of expenses
+    paid_by     = fields.Many2one('res.partner', string="Paid by" , required=True, auto_join=True, index=True, ondelete='cascade')
+    paid        = fields.Boolean(string="Paid", default=True , required=True, auto_join=True, index=True, ondelete='cascade')
+    payment_method = fields.Selection([('cash', 'Cash'), ('cheque', 'Cheque'), ('mobile_money', 'Mobile Money'),], required=True)
+    #payment_reference = fields.Char(string='Payment reference', required=True)
+    supplier = fields.Many2one('expense.supplier', required=True, auto_join=True, index=True, ondelete='cascade')
+    parent_id = fields.Many2one(comodel_name="truck.trip", string="Parent ID", required=False, auto_join=True, index=True, ondelete='cascade')
+
+class ProductExpenses(models.Model):
+    _name = 'expenses.product'
+
+    name = fields.Char()
+
+class ExpenseType(models.Model):
+    _name = 'expense.type'
+    
+
+    name = fields.Char(string="Expense Type")
+
+class ExpenseSupplier(models.Model):
+    _name = 'expense.supplier'
+
+    name = fields.Char(string="Supplier name")
