@@ -7,21 +7,22 @@
         <field name="model">truck.trip</field>
         <field name="arch" type="xml">
             <tree string="Trips">
-            <field name="trip_no" />
-            <field name="truck" />
-            <field name="customer" />
-            <field name="trip_type" />
-            <field name="start_country"/>
-            <field name="departure_date" />
-            <field name="end_country" />
-            <field name="arrived_date" />
-            <field name="total_amount" sum="Total Trip Return" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-            <field name="total_commission" sum="Total Commission"/>
-            <field name="total_return" sum="Total Return" />
-            <field name="rate" />
-            <field name="total_return_rate" sum="Total return in Tsh"/>
+                <field name="trip_no" />
+                <field name="truck" />
+                <field name="customer" />
+                <field name="trip_type" />
+                <field name="start_country"/>
+                <field name="departure_date" />
+                <field name="end_country" />
+                <field name="arrived_date" />
+                <field name="total_amount" sum="Total Trip Return" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="total_commission" sum="Total Commission"/>
+                <field name="total_return" sum="Total Return" />
+                <field name="rate" />
+                <field name="total_return_rate" sum="Total return in Tsh"/>
+                <field name="sum_total_expense" sum="Total"/>
+                <field name="overall_return" sum="Overall"/>
             </tree>
-            
         </field>
     </record>
     <!--Trip form view-->
@@ -53,18 +54,6 @@
                                 <field name="arrived_date" />
                                 <field name="unloaded_date" />
                             </group>
-                            <!--notebook>
-                                <page string="Cargo details">
-                                    <field name="line_ids" readonly="1">
-                                        <tree>
-                                            <field name="cargo_type"/>
-                                            <field name="cargo_amount"/>
-                                            <field name="cargo_quantity"/>
-                                            <field name="total_amount" />
-                                        </tree>
-                                    </field>
-                                </page>
-                            </notebook-->
                             <group string="Cargo Details">
                                 <field name="cargo_type" />
                                 <field name="cargo_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>

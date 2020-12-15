@@ -30,7 +30,20 @@ class TruckTrips(models.Model):
     def _compute_rate(self):
         for myrate in self:
             myrate['total_return_rate'] = myrate.total_return * myrate.rate
-            
+
+    @api.one      
+    @api.depends('child_id')
+    def _compute_sum(self):
+        total = 0
+        for rec in self.child_id:
+            total += rec.expense_total
+        self.sum_total_expense = total
+
+    @api.one
+    @api.depends('total_return_rate', 'sum_total_expense')
+    def _overall_total(self):
+        for rec in self:
+            rec['overall_return'] = (rec.total_return_rate - rec.sum_total_expense)
 
     #Truck trips
     trip_no     = fields.Many2one('trip.number', required=True, unique=True, auto_join=True, index=True, ondelete='cascade')
@@ -64,7 +77,14 @@ class TruckTrips(models.Model):
 
     rate = fields.Float(string="Rate(Tsh)", required=True)
     total_return_rate = fields.Float(string="Total Return without expenses (Tsh)", compute="_compute_rate")
+    
+    #for Notebook Expenses
     child_id = fields.One2many(comodel_name="expense.truck", inverse_name="parent_id", string="General Expense",required=False, auto_join=True, index=True, ondelete='cascade')
+    #Sum of expenses from each trip
+    sum_total_expense = fields.Float(string="Total Expenses(Tsh)", compute="_compute_sum")
+
+    overall_return = fields.Float(string="Overall return(Tsh)",  compute="_overall_total")
+
 
     #Truck Expenses
 class TruckExpenses(models.Model):
