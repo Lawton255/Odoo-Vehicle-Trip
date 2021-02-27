@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <!--search view for trip expenses-->
+        <record id="trip_expenses_search_view" model="ir.ui.view">
+            <field name="name">expense.truck.view.search</field>
+            <field name="model">expense.truck</field>
+            <field name="arch" type="xml">
+                <search string="Search Trip expenses">
+
+                    <filter name="expense_type" />
+                    <filter name="expense_product" />
+                    <filter name="payment_method" />
+                    <filter name="payment_reference" />
+                </search>
+            </field>
+        </record>
     <!--Trip Tree view-->
       <record id="view_tree_truck_trip_inherited" model="ir.ui.view">
         <field name="name">Trip Tree</field>
@@ -69,28 +84,31 @@
                             <group string="Total Cargo Return without Expenses in USD">
                                 <field name="total_return" />
                             </group>
-                            <group string="Total Cargo Return without Expenses in Tsh">
+                            <group string="Total Cargo Return in Tsh">
                                 <field name="rate" />
                                 <field name="total_return_rate" />
+                                <field name="sum_total_expense" sum="Total"/>
+                                <field name="overall_return" sum="Overall"/>
                             </group>
                             <notebook>
                             <page name="Expenses" string="Truck Expense">
                                 <group>
                                     <field name="child_id" widget="one2many_list">
-                                        <tree string="General Expense" editable="bottom">
+                                        <tree string="Expenses" editable="bottom">
                                             <field name="date"/>
                                             <!--field name="trip_no" /-->
-                                            <field name="responsible" />
+                                            <!--field name="responsible" /-->
                                             <field name="expense_type" />
                                             <field name="expense_product" />
                                             <field name="expense_amount" />
                                             <field name="expense_qty" />
-                                            <field name="paid_by" />
+                                            <!--field name="paid_by" /-->
                                             <field name="payment_method" />
+                                            <field name="payment_reference" />
                                             <field name="supplier" />
                                             <field name="paid" />
                                             <field name="expense_total" sum="Total"/>
-                                        
+
                                         </tree>
                                     </field>
                             </group>
@@ -106,7 +124,7 @@
         <field name="name">Trips</field>
         <field name="res_model">truck.trip</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">Create first trip
@@ -115,8 +133,8 @@
         </record>
         <menuitem
             id="truck_trip_menu"
-            name="Truck Trip"
-            sequence="2"/>
+            name="Truck Trip and Expenses"
+            sequence="3"/>
         <menuitem
             id="model_name_menu"
             name="Trips"

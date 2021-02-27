@@ -50,7 +50,7 @@ class TruckTrips(models.Model):
     customer    = fields.Many2one('res.partner' , string='Customer name', required=True, auto_join=True, index=True, ondelete='cascade')
     truck       =  fields.Many2one('fleet.vehicle', string='Truck', required=True, auto_join=True, index=True, ondelete='cascade')
     trip_type   = fields.Selection([('go', 'Go'), ('return', 'Return')], required=True)
-    container_no = fields.Integer(string="Container number" , required=True)
+    container_no = fields.Char(string="Container number" , required=True)
     container_type  = fields.Selection([('0', '0'), ('20', '20'), ('40', '40')], default='0', required=True, string="Container Type")
     departure_date  = fields.Date(string='Departure date')
     arrived_date  = fields.Date(string='Arrived date')
@@ -122,7 +122,7 @@ class TruckExpenses(models.Model):
     paid_by     = fields.Many2one('res.partner', string="Paid by" , required=True, auto_join=True, index=True, ondelete='cascade')
     paid        = fields.Boolean(string="Paid", default=True , required=True, auto_join=True, index=True, ondelete='cascade')
     payment_method = fields.Selection([('cash', 'Cash'), ('cheque', 'Cheque'), ('mobile_money', 'Mobile Money'),], required=True)
-    #payment_reference = fields.Char(string='Payment reference', required=True)
+    payment_reference = fields.Char(string='Payment reference', required=False)
     supplier = fields.Many2one('expense.supplier', required=True, auto_join=True, index=True, ondelete='cascade')
     parent_id = fields.Many2one(comodel_name="truck.trip", string="Trip no", required=False, auto_join=True, index=True, ondelete='cascade')
 

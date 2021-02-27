@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!--Tree view-->
+    <record id="truck_expenses_tree_view" model="ir.ui.view">
+         <field name="model">truck.expenses</field>
+        <field name="arch" type="xml">
+            <tree string="Truck Expenses" editable="top">
+                <field name="date" />
+                <field name="trip_no" />
+                <field name="responsible" />
+                <field name="expense_type" />
+                <field name="expense_product" />
+                <field name="expense_amount" />
+                <field name="expense_qty" />
+                <field name="paid_by" />
+                <field name="payment_method" />
+                <field name="supplier" />
+                <field name="paid" />
+                <field name="expense_total" sum="Total"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Form view-->
+    <!--record id="truck_expenses_view_form" model="ir.ui.view">
+        <field name="name">truck.expenses.view.form</field>
+        <field name="model">truck.expenses</field>
+        <field name="arch" type="xml">
+            <form string="Truck Expenses">
+                <sheet>
+                    <group col="2" string="General Expenses">
+                        <group>
+                            <field name="date" />
+                            <field name="trip_no" />
+
+                        </group>
+                        <group>
+                            <field name="expense_type" />
+                            <field name="expense_product" />
+                            <field name="responsible" />
+                            <field name="expense_amount" />
+                            <field name="expense_qty" />
+                            <field name="expense_total" />
+                        </group>
+
+                        <notebook>
+                            <page name="truck_expenses" string="Expenses" >
+                                <group>
+                                    <field name="expense_id" widget="one2many_list" />
+                                        <tree string="Truck Expenses" editable="bottom">
+                                            <field name="date" />
+                                            <field name="trip_no" />
+                                            <field name="expense_type" />
+                                            <field name="expense_product" />
+                                            <field name="responsible" />
+                                            <field name="expense_amount" />
+                                            <field name="expense_qty" />
+                                            <field name="expense_total" />
+                                        </tree>
+                                </group>
+                                
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record-->
+
+    <!--Menu action-->
+    <record id="expenses_menu_action" model="ir.actions.act_window">
+         <field name="name">Truck Expenses</field>
+        <field name="res_model">truck.expenses</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create"> Create Trip, Workshop and Driver Expenses
+            </p>
+        </field>
+    </record>
+
+    <!--menuitem
+        id="truck_expenses_menu"
+        name="Truck Expenses"
+        sequence="4"/-->
+    <menuitem
+        id="sub_truck_expenses_menu"
+        name="Truck Expenses"
+        action="expenses_menu_action"
+        parent="truck_trip_menu"
+        sequence="1"/>
+    </data>
+</odoo>
